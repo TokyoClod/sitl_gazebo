@@ -18,8 +18,9 @@
   <xacro:arg name='visual_material' default='DarkGrey' />
   <xacro:arg name='enable_mavlink_interface' default='true' />
   <xacro:arg name='enable_wind' default='false' />
+  <xacro:arg name='enable_camera' default='true' />
   <!-- The following causes segfault with multiple vehicles if defaults to true!!! -->
-  <xacro:arg name='enable_ground_truth' default='false' />
+  <xacro:arg name='enable_ground_truth' default='true' />
   <xacro:arg name='enable_logging' default='false' />
   <xacro:arg name='log_file' default='iris' />
 
@@ -152,6 +153,27 @@
     >
     </xacro:bag_plugin_macro>
   </xacro:if>
+
+  <!---->
+  <xacro:camera_macro
+    namespace="${namespace}"
+    parent_link="base_link"
+    camera_suffix="downward"
+    frame_rate="30"
+    horizontal_fov="1.7453"
+    image_width="640"
+    image_height="480"
+    image_format="R8G8B8"
+    min_distance="0.1"
+    max_distance="100"
+    noise_mean="0.0"
+    noise_stddev="0.0"
+    enable_visual="true"
+  >
+    <cylinder length="0.01" radius="0.007"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 1.5708 0.0" />
+  </xacro:camera_macro>
+
 
 </robot>
 

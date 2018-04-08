@@ -488,7 +488,8 @@ void GazeboMavlinkInterface::ImuCallback(ImuPtr& imu_message) {
       imu_message->angular_velocity().x(),
       imu_message->angular_velocity().y(),
       imu_message->angular_velocity().z()));
-    ignition::math::Vector3d mag_b = q_nb.RotateVectorReverse(mag_n) + mag_noise_b;
+    //ignition::math::Vector3d mag_b = q_nb.RotateVectorReverse(mag_n) + mag_noise_b;
+    ignition::math::Vector3d mag_b = q_nb.RotateVectorReverse(mag_n);
 
   if (imu_update_interval_!=0 && dt >= imu_update_interval_)
   {
@@ -531,7 +532,7 @@ void GazeboMavlinkInterface::ImuCallback(ImuPtr& imu_message) {
 
     // Apply 1 Pa RMS noise
     float abs_pressure_noise = 1.0f * (float)w;
-    sensor_msg.abs_pressure += abs_pressure_noise;
+    //sensor_msg.abs_pressure += abs_pressure_noise;
 
     // convert to hPa
     sensor_msg.abs_pressure *= 0.01f;
@@ -541,7 +542,8 @@ void GazeboMavlinkInterface::ImuCallback(ImuPtr& imu_message) {
     float rho = 1.225f / density_ratio;
 
     // calculate pressure altitude including effect of pressure noise
-    sensor_msg.pressure_alt = alt_msl - abs_pressure_noise / (gravity_W_.Length() * rho);
+    //sensor_msg.pressure_alt = alt_msl - abs_pressure_noise / (gravity_W_.Length() * rho);
+    sensor_msg.pressure_alt = alt_msl;
 
     // calculate differential pressure in hPa
     // if vehicle is a tailsitter the airspeed axis is different (z points from nose to tail)
