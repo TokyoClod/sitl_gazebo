@@ -159,7 +159,7 @@
     namespace="${namespace}"
     parent_link="base_link"
     camera_suffix="downward"
-    frame_rate="30"
+    frame_rate="50"
     horizontal_fov="1.7453"
     image_width="640"
     image_height="480"
@@ -179,7 +179,7 @@
       <frameName>map</frameName>
       <bodyName>base_link</bodyName>
       <topicName>/ground_truth</topicName>
-      <updateRate>30.0</updateRate>
+      <updateRate>50.0</updateRate>
     </plugin>
   </gazebo>
 
